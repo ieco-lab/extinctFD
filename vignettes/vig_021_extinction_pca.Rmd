@@ -65,7 +65,7 @@ Read in the PCA data in `.rda` form. We also remove the only currently extinct s
 
 ```{r raw data}
 #nowto add in the ordering from the maxsvl data
-data(maxsvl, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "maxsvl.rda"))
 
 #get the extinction order in the leio object
 maxsvl <- maxsvl %>%
@@ -76,7 +76,7 @@ maxsvl <- maxsvl %>%
 #read for PCA data
 if(svl.correct == TRUE && use.svl == TRUE){
   #default uses both
-  data(dat_pca_tidy, package = "leiocephalus")
+  load(file = file.path(here::here(), "data", "dat_pca_tidy.rda"))
   #recode to leio to make it easier
   leio <- dat_pca_tidy
   #keep just columns we need
@@ -88,7 +88,7 @@ if(svl.correct == TRUE && use.svl == TRUE){
   
 } else if(svl.correct == TRUE && use.svl == FALSE){
   #no svl in pca
-  data(dat_pca_tidy_nosvl, package = "leiocephalus")
+  load(file = file.path(here::here(), "data", "dat_pca_tidy_nosvl.rda"))
   #recode to leio to make it easier
   leio <- dat_pca_tidy_nosvl
   #keep just columns we need
@@ -100,7 +100,7 @@ if(svl.correct == TRUE && use.svl == TRUE){
   
 } else if(svl.correct == FALSE && use.svl == TRUE){
   #no scaling version
-  data(dat_pca_tidy_norescale, package = "leiocephalus")
+  load(file = file.path(here::here(), "data", "dat_pca_tidy_norescale.rda"))
    #recode to leio to make it easier
   leio <- dat_pca_tidy_norescale
   #keep just columns we need
@@ -112,7 +112,7 @@ if(svl.correct == TRUE && use.svl == TRUE){
   
 } else if(svl.correct == FALSE && use.svl == FALSE){
   #no scaling and no svl
-  data(dat_pca_tidy_nosvl_norescale, package = "leiocephalus")
+  load(file = file.path(here::here(), "data", "dat_pca_tidy_nosvl_norescale.rda"))
   #recode to leio to make it easier
   leio <- dat_pca_tidy_nosvl_norescale
   #keep just columns we need
@@ -137,35 +137,35 @@ if(TRUE){
   #need to se the way the data are saved here based on the switches added
 if(svl.correct == TRUE && use.svl == TRUE){
   #default uses both
-data(sim_extinction_present_pc1, package = "leiocephalus")
-data(sim_extinction_present_pc2, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "sim_extinction_present_pc1.rda"))
+load(file = file.path(here::here(), "data", "sim_extinction_present_pc2.rda"))
   #assign the sim data to correpsonding objects
 sim_extinction_pc1 <- sim_extinction_present_pc1
 sim_extinction_pc2 <- sim_extinction_present_pc2
 
 } else if(svl.correct == TRUE && use.svl == FALSE){
   #default uses both
-data(sim_extinction_present_pc1_nosvl, package = "leiocephalus")
-data(sim_extinction_present_pc2_nosvl, package = "leiocephalus")
+#load(file = file.path(here::here(), "data", "sim_extinction_present_pc1_nosvl.rda"))
+#load(file = file.path(here::here(), "data", "sim_extinction_present_pc2_nosvl.rda"))
   #assign the sim data to correpsonding objects
-sim_extinction_pc1 <- sim_extinction_present_pc1_nosvl
-sim_extinction_pc2 <- sim_extinction_present_pc2_nosvl
+#sim_extinction_pc1 <- sim_extinction_present_pc1_nosvl
+#sim_extinction_pc2 <- sim_extinction_present_pc2_nosvl
 
 } else if(svl.correct == FALSE && use.svl == TRUE){
   #default uses both
-data(sim_extinction_present_pc1_norescale, package = "leiocephalus")
-data(sim_extinction_present_pc2_norescale, package = "leiocephalus")
+#load(file = file.path(here::here(), "data", "sim_extinction_present_pc1_norescale.rda"))
+#load(file = file.path(here::here(), "data", "sim_extinction_present_pc2_norescale.rda"))
   #assign the sim data to correpsonding objects
-sim_extinction_pc1 <- sim_extinction_present_pc1_norescale
-sim_extinction_pc2 <- sim_extinction_present_pc2_norescale
+#sim_extinction_pc1 <- sim_extinction_present_pc1_norescale
+#sim_extinction_pc2 <- sim_extinction_present_pc2_norescale
   
 } else if(svl.correct == FALSE && use.svl == FALSE){
   #default uses both
-data(sim_extinction_present_pc1_nosvl_norescale, package = "leiocephalus")
-data(sim_extinction_present_pc2_nosvl_norescale, package = "leiocephalus")
+#load(file = file.path(here::here(), "data", "sim_extinction_present_pc1_nosvl_norescale.rda"))
+#load(file = file.path(here::here(), "data", "sim_extinction_present_pc2_nosvl_norescale.rda"))
   #assign the sim data to correpsonding objects
-sim_extinction_pc1 <- sim_extinction_present_pc1_nosvl_norescale
-sim_extinction_pc2 <- sim_extinction_present_pc2_nosvl_norescale
+#sim_extinction_pc1 <- sim_extinction_present_pc1_nosvl_norescale
+#sim_extinction_pc2 <- sim_extinction_present_pc2_nosvl_norescale
 
 }
    
@@ -201,7 +201,7 @@ if(FALSE){
 Read back in the saved heuristic version.
 ```{r load the empirical extinction data}
 #load the heuristic replicates
-data(empirical_extinct_reps_pca, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "empirical_extinct_reps_pca.rda"))
 
 #rename to keep easier
 empirical_extinct_reps <- empirical_extinct_reps_pca
@@ -241,7 +241,7 @@ plan(sequential)
   save(rep_emp_pc1, file = file.path(here(), "data", "rep_emp_pc1.rda"))
 }
 
-data(rep_emp_pc1, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "rep_emp_pc1.rda"))
 
 
 #now we need to summarise the data about the reps to get our output that approximates the original empirical loss data (lacking a spp_rm column)
@@ -339,7 +339,7 @@ plan(sequential)
   save(rep_emp_pc2, file = file.path(here(), "data", "rep_emp_pc2.rda"))
 }
 
-data(rep_emp_pc2, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "rep_emp_pc2.rda"))
 
 #now we need to summarise the data about the reps to get our output that approximates the original empirical loss data (lacking a spp_rm column)
 leio_ex_pc2 <- rep_emp_pc2 %>%
