@@ -23,7 +23,7 @@ library(ieco)
 
 Read in the raw data in `.rda` form:
 ```{r raw data}
-data(morph, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "morph.rda"))
 ```
 
 ## Analyses & Visualization
@@ -169,7 +169,7 @@ morph.tt.means <- as_tibble(ieco::spp.mean(as.data.frame(final.morph.tt),ids.tt)
 We will include the maximum recorded svl as a new trait (1.1) in the dataset. To do so, we need to read in the maxsvl data. Then, we will add maxsvl as a trait column in our final data object.
 ```{r add maxsvl, message=FALSE, warning=FALSE}
 #read in maxsvl
-data(maxsvl, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "maxsvl.rda"))
 
 #try to bind them
 morph.tt.means.final <- left_join(morph.tt.means, maxsvl, by = "species") %>%
