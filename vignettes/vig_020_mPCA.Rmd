@@ -41,9 +41,9 @@ use.svl <- TRUE
 
 Call the raw morphological data and IUCN data
 ```{r raw data}
-data(morph_means, package = "leiocephalus")
-data(iucn, package = "leiocephalus")
-data(trait_key, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "morph_means.rda"))
+load(file = file.path(here::here(), "data", "iucn.rda")) 
+load(file = file.path(here::here(), "data", "trait_key.rda"))  
 ```
 
 Remove the genus from the names for individual species for the morph dataset before merging them
@@ -472,8 +472,8 @@ Now we can load and try to make the composite figure.
 
 ```{r load objects for composite plot, fig.height=5.5, fig.width=7.5}
 #load other plots objects
-data("extinction_pc1_best")
-data("extinction_pc2_best")
+load(file = file.path(here::here(), "data", "extinction_pc1_best.rda"))
+load(file = file.path(here::here(), "data", "extinction_pc2_best.rda"))
 
 #present PCA
 pca_present <- dat_pca_tidy_time %>%
