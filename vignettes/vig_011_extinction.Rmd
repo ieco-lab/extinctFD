@@ -45,13 +45,15 @@ library(magrittr) #better piping
 library(BSDA) #z test
 library(furrr) #move through things faster than for loops
 library(scales) #color palette editing
+
 ```
+
 
 Read in the raw data in `.rda` form. Then, tidy it just a bit to keep columns of interest and have a single **maxSVL** value for each species. *Leiocephalus cuneus* is the main species to deal with here, as it was found on three separate islands (Antigua, Barbuda, and Guadeloupe), each of which has a different **maxSVL**. We deal with this by taking the mean across the three islands. 
 
 ```{r raw data, message=FALSE}
-data(maxsvl, package = "leiocephalus")
-data(iucn, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "iucn.rda"))
+load(file = file.path(here::here(), "data", "maxsvl.rda"))
 
 leio <- maxsvl
 
@@ -106,9 +108,9 @@ ggsave(filename = file.path(here(), "figures", "maxSVL_boxplot.png"), plot = p_s
 
 Read in the simulated data in `.rda` form. See simulations for more information.
 ```{r read in simulations, eval=TRUE}
-data(sim_extinction, package = "leiocephalus")
-data(sim_extinction_past, package = "leiocephalus")
-data(sim_extinction_present, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "sim_extinction.rda"))
+load(file = file.path(here::here(), "data", "sim_extinction_past.rda"))
+load(file = file.path(here::here(), "data", "sim_extinction_present.rda"))
 
 ```
 
@@ -176,7 +178,8 @@ if(FALSE){
 Now load those data.
 ```{r load the empirical extinction data}
 #load the heuristic replicates
-data(empirical_extinct_reps, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "empirical_extinct_reps.rda"))
+# load data files
 
 #bind the simulations and the original data
 leio_svl_unclustered <- cbind(leio_svl, empirical_extinct_reps)
@@ -211,8 +214,7 @@ plan(sequential)
   save(rep_emp_svl, file = file.path(here(), "data", "rep_emp_svl.rda"))
 }
 
-data(rep_emp_svl, package = "leiocephalus")
-
+load(file = file.path(here::here(), "data", "rep_emp_svl.rda"))
 
 #now we need to summarise the data about the reps to get our output that approximates the original empirical loss data (lacking a spp_rm column)
 leio_ex <- rep_emp_svl %>%
@@ -325,7 +327,7 @@ plan(sequential)
   save(rep_emp_present_svl, file = file.path(here(), "data", "rep_emp_present_svl.rda"))
 }
 
-data(rep_emp_present_svl, package = "leiocephalus")
+load(file = file.path(here::here(), "data", "rep_emp_present_svl.rda"))
 
 #now we need to summarise the data about the reps to get our output that approximates the original empirical loss data (lacking a spp_rm column)
 leio_ex_present <- rep_emp_present_svl %>%
