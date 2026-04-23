@@ -1,5 +1,8 @@
 # extinctFD
 Detecting functional diversity loss under directional, stabilizing, and disruptive models of nonrandom anthropogenic extinction of species. 
+<p align="center">
+  <img width="559" height="614" alt="image" src="https://github.com/user-attachments/assets/51ffa7de-3798-47bd-97c5-9510252e1f36" />
+</p>
 
 ## Overview
 This repository contains data and code to detect nonrandom extinction patterns by tracking changes in trait means and variances under directional, stabilizing, and disruptive extinction models.
