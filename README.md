@@ -37,12 +37,90 @@ Model fit is evaluated using:
 - Euclidean distance between observed and simulated trajectories
 - Simulation-based goodness-of-fit comparisons
 
-## Citation  
-Huron, NA, Hedges, SB, Helmus, MR. In Press. Detecting functional diversity loss under directional, stabilizing, and disruptive models of nonrandom anthropogenic extinction of species. Oikos.
+The framework compares observed extinction trajectories to simulated expectations under five extinction models:
+
+- random
+- directional (loss of large values)
+- directional (loss of small values)
+- stabilizing
+- disruptive
+
+For each model, extinction is simulated stepwise and changes in trait mean and variance are tracked through time. Model fit is evaluated using:
+
+- root-mean-square error (RMSE) between observed and expected trajectories
+- Euclidean distance between observed and simulated goodness-of-fit summaries
+- simulation-based comparison of observed fit relative to the distribution of simulated fits
   
-Huron, NA, Hedges, SB, Helmus, MR. 2022. Detecting stabilizing, directional, and disruptive
-patterns of anthropogenic species loss with general models of nonrandom extinction. bioRxiv.
-[doi:10.1101/2022.09.11.507476](https://doi.org/10.1101/2022.09.11.507476).
+## Repository contents
+
+The repository is organized into three main components:
+
+- `R/`  
+  Core functions used to simulate extinction sequences and quantify changes in trait distributions.
+  - `rnre.R` — simulate random and nonrandom extinction trajectories
+  - `sample_extinction.R`
+  - `stepwise_extinction.R`
+
+- `data/`  
+  Processed `.rda` objects used in the analyses, including:
+  - morphology and body-size data
+  - IUCN threat-status data
+  - PCA data objects
+  - simulated extinction outputs
+  - empirical extinction replicate objects
+
+- `vignettes/`  
+  Reproducible analysis workflows for data processing and case-study analyses:
+  - `vig_00_morphology_clean.Rmd` — morphology cleaning and preparation
+  - `vig_011_extinction.Rmd` — body-size extinction analyses
+  - `vig_020_mPCA.Rmd` — PCA construction
+  - `vig_021_extinction_pca.Rmd` — PCA-based extinction analyses
+
+## Analysis workflow
+
+A typical workflow is:
+
+1. Clean and prepare morphology data  
+   `vignettes/vig_00_morphology_clean.Rmd`
+
+2. Construct PCA trait space  
+   `vignettes/vig_020_mPCA.Rmd`
+
+3. Analyze body-size extinction patterns  
+   `vignettes/vig_011_extinction.Rmd`
+
+4. Analyze multivariate morphological extinction patterns  
+   `vignettes/vig_021_extinction_pca.Rmd`
+
+## Data objects
+
+Key data objects in `data/` include:
+
+- `morph.rda` — specimen-level morphology data
+- `morph_means.rda` — species-level morphology summaries
+- `maxsvl.rda` — species-level maximum SVL data
+- `iucn.rda` — IUCN categories and extinction-order information
+- `dat_pca_tidy*.rda` — PCA-ready trait datasets under alternative scaling options
+- `sim_extinction*.rda` — simulated extinction outputs
+- `rep_emp*.rda` and `empirical_extinct_reps*.rda` — empirical extinction replicate objects
+- `trait_key.rda` — trait metadata/key
+
+
+## Reproducibility
+
+The analyses are documented in the vignette files in the order listed above. Each vignette reads processed `.rda` files from the `data/` directory and reproduces the corresponding analysis steps.
+
+Because this repository is organized around vignette workflows rather than a single driver script, users should run the `.Rmd` files directly.
+
+## Citation
+
+If you use these code or data, please cite:
+
+Huron, N. A., Hedges, S. B., and Helmus, M. R. In press. Detecting functional diversity loss under directional, stabilizing, and disruptive models of nonrandom anthropogenic extinction of species. *Oikos*.
+
+Preprint version:
+
+Huron, NA, Hedges, SB, Helmus, MR. 2022. Detecting stabilizing, directional, and disruptive patterns of anthropogenic species loss with general models of nonrandom extinction. bioRxiv. [doi:10.1101/2022.09.11.507476](https://doi.org/10.1101/2022.09.11.507476).
 
 ## Keywords
 adaptive landscape, anthropogenic impact, statistical methods, Caribbean, herpetology, island biogeography, lizard, Anthropocene, hunting, deforestation, land development, introduced predators, natural selection, nonrandom extinction, functional diversity, Leiocephalus, body size
